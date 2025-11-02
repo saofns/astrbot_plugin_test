@@ -6,9 +6,13 @@ from astrbot.api import logger
 class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
-        logger.info("董卓回复插件已加载")
     
-    @filter.keyword("董卓")
-    async def dongzhuo_reply(self, event: AstrMessageEvent):
-        """当消息包含'董卓'时回复'何意味'"""
-        return event.plain_result("何意味")
+    async def handle_message(self, event: AstrMessageEvent):
+        """处理所有消息"""
+        message_text = event.get_plain_text()
+        
+        if "董卓" in message_text:
+            logger.info(f"检测到董卓，消息内容: {message_text}")
+            return event.plain_result("何意味")
+        
+        return None
