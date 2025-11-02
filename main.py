@@ -1,17 +1,18 @@
 from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
-import astrbot.api.message_components as Comp
-import random
 
-@register("dongzhuo_reply", "author", "董卓回复插件", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
+@register("dongzhuo_cmd", "author", "董卓指令插件", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
 class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
-        logger.info("董卓回复插件已加载")
     
-    @filter.keyword("董卓")
-    async def dongzhuo_reply(self, event: AstrMessageEvent):
-        """当消息包含'董卓'时回复'何意味'"""
-        # 简单版本 - 直接回复
+    @filter.command("董卓")
+    async def dongzhuo_command(self, event: AstrMessageEvent):
+        """董卓指令 - 使用 /董卓 触发"""
+        return event.plain_result("何意味")
+    
+    @filter.command("董卓", alias={"董太师", "董相国"})
+    async def dongzhuo_with_alias(self, event: AstrMessageEvent):
+        """支持多个别名：/董卓, /董太师, /董相国"""
         return event.plain_result("何意味")
