@@ -3,7 +3,7 @@ from astrbot.api.star import Context, Star, register
 from astrbot.api import logger # 使用 astrbot 提供的 logger 接口
 import astrbot.api.message_components as Comp
 
-@register("pucture sender", "author", "图片发送", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
+@register("pic_sen", "author", "图片发送", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
 class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
