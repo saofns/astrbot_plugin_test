@@ -11,8 +11,4 @@ class MyPlugin(Star):
     async def dongzhuo_command(self, event: AstrMessageEvent):
         """董卓指令 - 使用 /董卓 触发"""
         return event.plain_result("何意味")
-    
-    @filter.command("董卓", alias={"董太师", "董相国"})
-    async def dongzhuo_with_alias(self, event: AstrMessageEvent):
-        """支持多个别名：/董卓, /董太师, /董相国"""
-        return event.plain_result("何意味")
+
