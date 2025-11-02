@@ -1,20 +1,22 @@
 from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 from astrbot.api import logger # 使用 astrbot 提供的 logger 接口
+import astrbot.api.message_components as Comp
 
-@register("helloworld", "author", "一个简单的 Hello World 插件", "1.0.0", "repo url")
+@register("pucture sender", "author", "图片发送", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
 class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
 
-    # 注册指令的装饰器。指令名为 helloworld。注册成功后，发送 `/helloworld` 就会触发这个指令，并回复 `你好, {user_name}!`
-    @filter.command("dz", alias={'董卓', '吕布'})
+    
+    @filter.command(“pic”)
     async def helloworld(self, event: AstrMessageEvent):
-        '''这是一个 hello world 指令''' # 这是 handler 的描述，将会被解析方便用户了解插件内容。非常建议填写。
-        user_name = event.get_sender_name()
-        message_str = event.message_str # 获取消息的纯文本内容
-        logger.info("触发hello world指令!")
-        yield event.plain_result(f"和一位") # 发送一条纯文本消息
+       chain = [
+        Comp.At(qq=event.get_sender_id()), # At 消息发送者
+        
+       
+        Comp.Image.fromFileSystem("C:\Users\ASUS\Pictures\Screenshots\屏幕截图 2025-06-14 193304.png"), # 从本地文件目录发送图片
+        Comp.Plain("这是一个图片。")
+    ]
 
-    async def terminate(self):
-        '''可选择实现 terminate 函数，当插件被卸载/停用时会调用。'''
+   yield event.chain_result(chain)
