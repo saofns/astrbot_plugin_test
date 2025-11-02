@@ -14,7 +14,7 @@ class MyPlugin(Star):
             Comp.At(qq=event.get_sender_id()),  # At 消息发送者
             Comp.Plain(" "),
             # 注意：修正图片加载方法
-            Comp.Image.fromURL("https://imgchr.com/i/pVzbqV1"),  # 使用英文引号
+            Comp.Image.fromURL("https://s21.ax1x.com/2025/11/02/pVzbqV1.jpg"),  # 使用英文引号
             Comp.Plain("这是一个图片。")  # 使用英文引号
         ]
         
