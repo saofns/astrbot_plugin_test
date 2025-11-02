@@ -8,7 +8,7 @@ class MyPlugin(Star):
         super().__init__(context)
         logger.info("董卓回复插件已加载")
     
-    @filter.keyword("董卓")
+    @filter.keyword("董卓",alias={"董卓", "吕布","dongzhuo"})
     async def dongzhuo_reply(self, event: AstrMessageEvent):
         """当消息包含'董卓'时回复'何意味'"""
         logger.info("检测到董卓关键词，准备回复")
