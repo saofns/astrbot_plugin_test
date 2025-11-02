@@ -8,14 +8,17 @@ class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
     
-    @filter.command("pic")  # 使用英文引号
+    @filter.command("pic")
     async def helloworld(self, event: AstrMessageEvent):
-        chain = [
-            Comp.At(qq=event.get_sender_id()),  # At 消息发送者
-            Comp.Plain(" "),
-            # 注意：修正图片加载方法
-            Comp.Image.fromURL("https://s21.ax1x.com/2025/11/02/pVzbqV1.jpg"),  # 使用英文引号
-            Comp.Plain("这是一个图片。")  # 使用英文引号
-        ]
-        
-        return event.chain_result(chain)
+        try:
+            chain = [
+                Comp.At(qq=event.get_sender_id()),
+                Comp.Plain(" "),
+                Comp.Image.fromURL("https://s21.ax1x.com/2025/11/02/pVzbqV1.jpg"),
+                Comp.Plain("这是一个图片。")
+            ]
+            
+            return event.chain_result(chain)
+        except Exception as e:
+            logger.error(f"发送图片失败: {e}")
+            return event.plain_result(f"图片发送失败: {str(e)}")
