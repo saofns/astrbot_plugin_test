@@ -3,22 +3,15 @@ from astrbot.api.star import Context, Star, register
 from astrbot.api import logger
 import astrbot.api.message_components as Comp
 
-@register("pic_sen", "author", "图片发送", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
+@register("dongzhuo_reply", "author", "董卓回复插件", "1.0.0", "https://github.com/saofns/astrbot_plugin_test")
 class MyPlugin(Star):
     def __init__(self, context: Context):
         super().__init__(context)
     
-    @filter.command("pic")
-    async def helloworld(self, event: AstrMessageEvent):
-        try:
-            chain = [
-                Comp.At(qq=event.get_sender_id()),
-                Comp.Plain(" "),
-                Comp.Image.fromURL("https://s21.ax1x.com/2025/11/02/pVzbqV1.jpg"),
-                Comp.Plain("这是一个图片。")
-            ]
-            
-            return event.chain_result(chain)
-        except Exception as e:
-            logger.error(f"发送图片失败: {e}")
-            return event.plain_result(f"图片发送失败: {str(e)}")
+    @filter.keyword("董卓")
+    async def dongzhuo_reply(self, event: AstrMessageEvent):
+        chain = [
+            Comp.At(qq=event.get_sender_id()),  # At发送者
+            Comp.Plain(" 何意味")
+        ]
+        return event.chain_result(chain)
