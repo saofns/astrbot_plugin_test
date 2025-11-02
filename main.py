@@ -15,7 +15,7 @@ class MyPlugin(Star):
         Comp.At(qq=event.get_sender_id()), # At 消息发送者
         
        
-        Comp.Image.fromFileSystem("C:\Users\ASUS\Pictures\Screenshots\屏幕截图 2025-06-14 193304.png"), # 从本地文件目录发送图片
+        Comp.Image.fromFileSystem("https://imgchr.com/i/pVzbqV1"), # 从本地文件目录发送图片
         Comp.Plain("这是一个图片。")
     ]
 
