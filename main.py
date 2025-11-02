@@ -14,7 +14,7 @@ class MyPlugin(Star):
         user_name = event.get_sender_name()
         message_str = event.message_str # 获取消息的纯文本内容
         logger.info("触发hello world指令!")
-        yield event.plain_result(f"fuck you") # 发送一条纯文本消息
+        yield event.plain_result(f"和一位") # 发送一条纯文本消息
 
     async def terminate(self):
         '''可选择实现 terminate 函数，当插件被卸载/停用时会调用。'''
